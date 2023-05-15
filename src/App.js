@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from './pages/home.js';
-import TestPage from './pages/test.js';
+import FrndPage from './pages/frndship.js';
+import ReactThreeFiber from './pages/frndship.jsx';
+import ThreeScene from './pages/three.js';
 
 
 const App = () => {
@@ -9,7 +11,9 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/projects/frndship" element={<FrndPage />} />
+        <Route path="/projects/react3" element={<ReactThreeFiber />} />
+        <Route path="/projects/three" element={<ThreeScene />} />
       </Routes>
     </BrowserRouter>
 

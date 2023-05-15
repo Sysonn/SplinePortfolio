@@ -7,6 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -15,3 +16,120 @@ code {
 }
 
 
+hr {
+  border: none;
+  background-color: black;
+  height: 3px;
+  border: 'none';
+  background-color: #241C41;
+  height: '1px' 
+}
+
+
+
+.TitleWrapper{
+  position:absolute;
+  padding-top: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 97%;
+  /* border: 1px solid #c7b9ff; */
+  border-radius: 20px;
+  /* background-color: rgb(255, 255, 255, .3) */
+}
+
+.AboutMenu{
+  position:absolute;
+  align-items: row;
+  display: flex;
+  gap: 80px;
+  padding-right: 50px;
+  padding-left: 50px;
+  right: 0;
+  top: 0;
+  margin-top: 6px;
+  margin-right: 6px;
+  /* border: 1px solid #c7b9ff; */
+  /* border: 1px solid #7f70bd; */
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255, .3);
+  backdrop-filter: blur(10px);
+  opacity: 1;
+}
+
+#music-bars{
+  background-color: #7f70bd;
+  display: block;
+  border-radius: 5px;
+  width: 6px;
+  float: left;
+  margin-right: 2px;
+  bottom: 0;
+  transition: height 0.2s ease-out;
+}
+
+.MusicWrapper{
+  position: fixed;
+  height: 50px;
+  bottom: 0;
+  right: 0;
+  margin-right: 80px;
+  margin-bottom: 100px; 
+  padding: 0px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.TimeWrapper{
+  color: #7f70bd;
+  position: fixed;
+  font-size: 5vw;
+  bottom: 0;
+  left: 0;
+  transform: translate(-10%, 70%);
+  padding: 2vw; 
+  font-family: 'Quicksand', sans-serif;
+ border-radius: 25px;
+  backdrop-filter: blur(10px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.DescWrrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #3B3059;
+  margin-left: 25px;  
+  
+}
+
+/* Media queries for different devices */
+@media only screen and (max-width: 768px) {
+  /* Styles for devices with screen width up to 768px */
+  .TimeWrapper {
+    font-size: 50px;
+    margin-left: 20px;
+    margin-bottom: 80px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Styles for devices with screen width between 769px and 1024px */
+  .TimeWrapper {
+    font-size: 70px;
+    margin-left: 40px;
+    margin-bottom: 120px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  /* Styles for devices with screen width greater than 1025px */
+  .TimeWrapper {
+    font-size: 100px;
+    margin-left: 80px;
+    margin-bottom: 150px; 
+  }
+}

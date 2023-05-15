@@ -7,8 +7,17 @@ import { Container,
          Fader, 
          Wrapper, 
          Title, 
+         Title2,
         } from '../style/style.js'; 
 import { LoadingModal } from '../components/loadModal';
+import Equalizer from '../components/eq.js';
+import Clock from '../components/clock.js';
+import { TweenMax } from 'gsap';
+import * as THREE from 'three';
+
+
+
+
 
 
 
@@ -28,11 +37,14 @@ function HomePage() {
 
 
   
-
+ 
 
   const blob = useRef(null);
+  const cam = useRef(null);
 
   function onLoad(spline) {
+    const cameraObj = spline.findObjectByName('ui');
+    cam.current = cameraObj;
     const blobObj = spline.findObjectByName('Sphere');
     blob.current = blobObj;
 
@@ -50,12 +62,24 @@ function HomePage() {
     if (e.target.name === 'About Me') {
        //setIsTitleHidden(prevState => !prevState);
       setIsFaderShown(true);
-      navigate('/test');
+      navigate('projects/frndship');
     }
 
     if (e.target.name === 'UI/UX') {
-      //setOpacity(0.5); 
-      navigate('/test');
+      //navigate('/projects/frndship');
+
+        const camPosition = cam.current.position.clone();
+        const newPosition = new THREE.Vector3(
+          camPosition.x, // maintain the same x position
+          camPosition.y + 2000, // add 500 to the y position
+          camPosition.z, // maintain the same z position
+          //cam.current.visible = false
+        );
+
+        TweenMax.to(cam.current.position, 2, { x: newPosition.x, y: newPosition.y, z: newPosition.z });
+        console.log("cam: ", cam);
+        console.log("camPosition-y: ", cam.current.position.y);
+
    }
 
   }
@@ -69,7 +93,30 @@ function HomePage() {
             </Container>
         </Fader>
        {/* {!isTitleHidden && <Title>DEREK SISSON</Title>} */}
-       <Title>DEREK SISSON</Title>
+       <div class="TitleWrapper">
+          <Title style={{ }}> DEREK SISSON </Title>
+
+          <div class="DescWrrapper">
+            <div dangerouslySetInnerHTML={{ __html: '=&gt; PRODUCT MANAGER' }}></div>
+            <div dangerouslySetInnerHTML={{ __html: '=&gt; DEVELOPER' }}></div>
+            <div dangerouslySetInnerHTML={{ __html: '=&gt; DIGITAL DESIGNER & ARTIST' }}></div>
+            <div dangerouslySetInnerHTML={{ __html: '=&gt; XR ENTHUSIAST' }}></div>
+          </div>
+
+          <div class="AboutMenu">
+          <Title2>ABOUT ME</Title2>
+          <Title2>CONTACT</Title2>
+          <Title2>RESUME</Title2>
+          </div>
+
+          <div class="MusicWrapper">
+            <div style={{ fontSize: "24px"}}>Chemical by Post Malone</div>
+            <Equalizer />
+          </div>
+
+          <Clock />
+
+       </div>
     <Spline 
     style={{ height: '100vh', width: '100vw', }}
     onMouseDown={onMouseDown} 

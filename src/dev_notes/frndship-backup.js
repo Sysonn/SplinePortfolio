@@ -12,27 +12,25 @@ import {
 function TestPage() {
 
   const [sceneSource] = useState(
-    'https://prod.spline.design/wY3llFvdTqlqj6JI/scene.splinecode'
+    'https://prod.spline.design/UuiAgM4xAC9ftLdp/scene.splinecode'
    );
   const navigate = useNavigate();
 
 
-  const cube = useRef(null);
+  const blob = useRef(null);
 
   function onLoad(spline) {
  
-    const derekCubeObj = spline.findObjectByName('Cube');
+    const blobObj = spline.findObjectByName('Sphere');
 
-    cube.current = derekCubeObj;
+    blob.current = blobObj;
 
 
-    if (cube.current && cube.current.visible !== undefined && cube.current.visible === false && spline.sceneUrl !== "https://prod.spline.design/4ujCjJlTmdRi4uhD/scene.splinecode") {
-      console.log("onLoad - Cube is Not Visible: ", cube.current.visible);
-      setIsFaderShown(true);
-    } else if (cube.current && cube.current.visible !== undefined) {
-      console.log("onLoad - Cube is Visible: ", cube.current.visible);
-      setIsFaderShown(false);
-    }
+    if (blob.current &&  blob.current.visible !== undefined && blob.current.visible === false && spline.sceneUrl !== "https://prod.spline.design/wY3llFvdTqlqj6JI/scene.splinecode") {
+        setIsFaderShown(true);
+      } else if (blob.current && blob.current.visible !== undefined) {
+        setIsFaderShown(false);
+      }
 
   }
 
