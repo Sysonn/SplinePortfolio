@@ -14,7 +14,7 @@ const Clock = () => {
   const formattedTime = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', ampm: false,})//.replace(/AM|PM/g, "").trim();
 
 
-  return <div class="TimeWrapper">{formattedTime}<span style={{fontSize: "40px", marginLeft: "20px", pointerEvents: "none"}}>{formattedSeconds}</span></div>;
+  return <div class="TimeWrapper" id="change-color">{formattedTime}<span style={{fontSize: "40px", marginLeft: "20px", pointerEvents: "none"}}>{formattedSeconds}</span></div>;
 };
 
 export default Clock;

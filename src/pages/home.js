@@ -104,7 +104,7 @@ function HomePage() {
           </div>
 
           <div class="AboutMenu">
-          <Title2>ABOUT ME</Title2>
+          <Title2 id="change-color">ABOUT ME</Title2>
           <Title2>CONTACT</Title2>
           <Title2>RESUME</Title2>
           </div>

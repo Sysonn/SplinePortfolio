@@ -67,13 +67,16 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   position: relative;
   font-family: 'Days One', sans-serif;
-  font-size: 32px;
-  //color: #241C41;
-  color: #3B3059;
+  font-size: 40px;
+  color: #241C41;
+  opacity: 0.8;
   padding: 0;
   margin-left: 20px;
   margin-top: 10px;
   letter-spacing: -2.5px;
+
+
+
 `;
 
 
@@ -81,8 +84,20 @@ export const Title2 = styled.h2`
   position: relative;
   font-family: 'Days One', sans-serif;
   font-size: 18px;
-  color: #7f70bd;
+
   padding: 0;
   margin-top: 15px;
   letter-spacing: -1px;
+
+  ${({ color }) =>
+  color &&
+  css`
+    color: ${color};
+  `};
+
+  ${({ transition }) =>
+  transition &&
+  css`
+    transition: color 1s ease-in;
+  `};
 `;

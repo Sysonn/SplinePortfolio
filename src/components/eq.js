@@ -7,7 +7,7 @@ const Container = styled.div`
 `;
 
 const Bar = styled.span`
-  height: 70px;
+  height: ${({ height }) => height}px;
   width: 3px;
   background-color: black;
   margin-right: 4px;
@@ -44,7 +44,7 @@ const Equalizer = () => {
   return (
     <Container>
       {Array.from({ length: 40 }, (_, index) => (
-        <Bar id="music-bars" key={index} ref={(bar) => (barsRef.current[index] = bar)} />
+        <Bar id="music-bars" key={index} ref={(bar) => (barsRef.current[index] = bar)} height={Math.random() * 40}/>
       ))}
     </Container>
   );

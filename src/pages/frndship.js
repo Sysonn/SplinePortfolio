@@ -12,6 +12,7 @@ import { Container,
 import { LoadingModal } from '../components/loadModal';
 import Equalizer from '../components/eq.js';
 import Clock from '../components/clock.js';
+import TrackCanvasScroll from '../components/trackScroll';
 import { TweenMax } from 'gsap';
 import * as THREE from 'three';
 
@@ -20,7 +21,7 @@ function TestPage() {
 
 
   const [sceneSource] = useState("https://prod.spline.design/iow3jieq7twfDFrg/scene.splinecode");
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const [isFaderShown, setIsFaderShown] = useState(false);
 
@@ -31,20 +32,45 @@ function TestPage() {
   
   const blob = useRef(null);
   const blob2 = useRef(null);
-  const cam = useRef(null);
   const ui2 = useRef(null);
+
 
   function onLoad(spline) {
 
-
-    const cameraObj = spline.findObjectByName('ui');
-    cam.current = cameraObj;
     const ui2Obj = spline.findObjectByName('ui 2');
     ui2.current = ui2Obj;
-    const blobObj = spline.findObjectByName('Sphere');
+
+    const blobObj = spline.findObjectByName('Blob1');
     blob.current = blobObj;
-    const blob2Obj = spline.findObjectByName('Sphere 2');
+
+    const blob2Obj = spline.findObjectByName('Blob2');
     blob2.current = blob2Obj;
+
+     //scroll wheel effect/////////////////
+    // function handleWheelScroll() {
+    //     //const object = spline.findObjectByName(objectName);
+    //     console.log("wheel scroll");
+    //    // spline.emitEventReverse("start", blob);
+    // }
+
+    // window.addEventListener("wheel", handleWheelScroll);
+
+    // useEffect(() => {
+    //   function handleWheelScroll() {
+    //         spline.emitEventReverse("start", ui2Obj);
+    //       }
+      
+    //   // Add an event listener to the specific element for the 'wheel' event
+    //   const element = document.getElementById('myElement'); // Replace 'myElement' with the ID of the element you want to attach the event listener to
+    //   element.addEventListener("wheel", handleWheelScroll);
+  
+    //   return () => {
+    //     // Clean up the event listener when the component unmounts
+    //     element.removeEventListener("wheel", handleWheelScroll);
+    //   };
+    // }, []);
+
+
 
       
 
@@ -59,109 +85,44 @@ function TestPage() {
   function onMouseDownFrnd(e) {
   
     if (e.target.name === 'Projects') {
-      //navigate('/projects/frndship');
+      console.log('projects clicked') 
 
-      console.log('projects clicked')
+      setColor('#7CA9FF'); // Change to the initial color
+      requestAnimationFrame(() => {
+        setColor('#7CA9FF'); // Change to the final color
+      });
 
-   }
-
-   if (e.target.name === 'UI/UX') {
-    //navigate('/projects/frndship');
-    blob2.current.visible = false;
-
-    console.log("blob: ", blob);
-    console.log("blob.current: ", blob.current);
-    console.log("blob.current.parent: ", blob.current.parent);
-    console.log("blob.parent: ", blob.parent);
-
-      const camPosition = cam.current.position.clone();
-      const newPosition = new THREE.Vector3(
-        camPosition.x, // maintain the same x position
-        camPosition.y + 2000, // add 500 to the y position
-        camPosition.z, // maintain the same z position
-        //cam.current.visible = false
-      );
-
-      TweenMax.to(cam.current.position, 2, { x: newPosition.x, y: newPosition.y, z: newPosition.z, yoyo: false});
-      //console.log("cam: ", cam);
-      //console.log("camPosition-y: ", cam.current.position.y);
-
-      
-      //// Move UI 2 Into Scene/ ///
-      const ui2Position = cam.current.position.clone();
-      const newui2Position = new THREE.Vector3(
-        ui2Position.x,
-        ui2Position.y + 300, 
-        ui2Position.z, 
-      );
-      TweenMax.to(ui2.current.position, 2, { x: newui2Position.x, y: newui2Position.y, z: newui2Position.z, });
-       //////////
+      const textElements = document.querySelectorAll('#change-color', '#change-color2 Title2');
+      textElements.forEach((element) => {
+        console.log("color change: ", element);
+        element.style.transition = 'color 1s ease-in';
+        element.style.color = '#7CA9FF'; // Change to the initial color
+        requestAnimationFrame(() => {
+          element.style.color = '#7CA9FF'; // Change to the final color
+        });
+      });
 
 
-        //// Move Blob1 out of Scene/ ///
-      // const blob1Position = blob.current.position.clone();
-      // const newblob1Position = new THREE.Vector3(
-      //   blob1Position.x,
-      //   blob1Position.y + 2500, 
-      //   blob1Position.z, 
-      // );
-      // TweenMax.to(blob.current.position, 2, { x: newblob1Position.x, y: newblob1Position.y, z: newblob1Position.z, 
-      //   onComplete: function() {
-      //   blob.current.visible = false;
-      // }});
-       //////////
+      const bgElements = document.querySelectorAll('#music-bars');      
+      bgElements.forEach((element) => {
+        console.log("color change: ", element);
+        //element.style.transition = 'color 0.5s ease-in';
+        element.style.backgroundColor = '#7CA9FF'; // Change to the initial color
+        requestAnimationFrame(() => {
+          element.style.color = '#7CA9FF'; // Change to the final color
+        });
+      });
 
+    }
 
-       
-        //// TEST - Move Blob1 into Scene/ ///
-          const blob1Position = blob.current.position.clone();
-          const newblob1Position = new THREE.Vector3(
-            blob1Position.x,
-            blob1Position.y - 2500, 
-            blob1Position.z, 
-          );
-          TweenMax.to(blob.current.position, 1, { x: newblob1Position.x, y: newblob1Position.y, z: newblob1Position.z, 
-            onComplete: function() {
-            blob.current.visible = true;
-            blob2.current.emitEventReverse("start", "Sphere");
-          }});
-          ///////move in
-          // const blob1Position = blob.current.position.clone();
-          // const newblob1Position = new THREE.Vector3(
-          //   blob1Position.x,
-          //   blob1Position.y - 2500, 
-          //   blob1Position.z, 
-          // );
-          // TweenMax.to(blob.current.position, 1, { x: newblob1Position.x, y: newblob1Position.y, z: newblob1Position.z, 
-          //   onComplete: function() {
-          //   blob.current.visible = false;
-          // }});
+    if (e.target.name === 'UI/UX') {
+      console.log('UI/UX clicked')
 
-       //////////
-
-
-        //// Move Blob2 Into Scene/ ///
-      const blob2Position = blob2.current.position.clone();
-      const newblob2Position = new THREE.Vector3(
-        blob2Position.x,
-        blob2Position.y + 2500, 
-        blob2Position.z, 
-      );
-    
-      TweenMax.to(blob2.current.position, 2, { x: newblob2Position.x, y: newblob2Position.y, z: newblob2Position.z, 
-        onComplete: function() {
-        //obj.visible = true;
-        blob2.current.emitEventReverse("start", "Sphere 2");
-      }});
-       //////////
-
-
-
- }
+    }
 
   }
 
-
+  const [color, setColor] = useState('#7f70bd');
 
   function onMouseHover(e) {
 
@@ -175,19 +136,27 @@ function TestPage() {
   return (
    
     <Wrapper>
-        <Fader isFaderShown={isFaderShown}>
+        {/* <Fader isFaderShown={isFaderShown}>
             <Container>
               <LoadingModal />
             </Container>
-        </Fader>
+        </Fader> */}
        {/* {!isTitleHidden && <Title>DEREK SISSON</Title>} */}
        <div class="TitleWrapper">
-          <Title style={{ }}> DEREK SISSON </Title>
+          <Title color={color} transition> DEREK SISSON </Title>
+
+
+          <div class="DescWrrapper">
+            <div id="color-change" dangerouslySetInnerHTML={{ __html: '=&gt; PRODUCT MANAGER' }}></div>
+            <div id="color-change" dangerouslySetInnerHTML={{ __html: '=&gt; DEVELOPER' }}></div>
+            <div id="color-change" dangerouslySetInnerHTML={{ __html: '=&gt; DIGITAL DESIGNER & ARTIST' }}></div>
+            <div id="color-change"  dangerouslySetInnerHTML={{ __html: '=&gt; XR ENTHUSIAST' }}></div>
+          </div>
         
           <div class="AboutMenu">
-          <Title2>ABOUT ME</Title2>
-          <Title2>CONTACT</Title2>
-          <Title2>RESUME</Title2>
+          <Title2 color={color} transition>ABOUT ME</Title2>
+          <Title2 color={color} transition>CONTACT</Title2>
+          <Title2 color={color} transition>RESUME</Title2>
           </div>
 
           <div class="MusicWrapper">
